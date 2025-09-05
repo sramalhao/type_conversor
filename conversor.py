@@ -1,3 +1,5 @@
+import xml.etree.ElementTree as ET
+
 def converter_atom_para_rss(caminho_arquivo_atom, caminho_arquivo_rss):
     # Analisa o arquivo .atom
     arvore = ET.parse(caminho_arquivo_atom)
