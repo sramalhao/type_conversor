@@ -1,15 +1,12 @@
 import xml.etree.ElementTree as ET
 
 def converter_atom_para_rss(caminho_arquivo_atom, caminho_arquivo_rss):
-    # Analisa o arquivo .atom
     arvore = ET.parse(caminho_arquivo_atom)
     raiz = arvore.getroot()
 
-    # Cria um elemento raiz para .RSS
     rss = ET.Element('rss', version='2.0')
     canal = ET.SubElement(rss, 'channel')
 
-    # Mapeia elementos .atom para elementos .RSS
     for elem in raiz:
         if elem.tag.endswith('title'):
             titulo = ET.SubElement(canal, 'title')
@@ -33,8 +30,6 @@ def converter_atom_para_rss(caminho_arquivo_atom, caminho_arquivo_rss):
                     descricao = ET.SubElement(item, 'description')
                     descricao.text = elem_entrada.text
 
-    # Cria uma nova árvore XML para RSS
     arvore_rss = ET.ElementTree(rss)
 
-    # Escreve a árvore RSS em um arquivo
     arvore_rss.write(caminho_arquivo_rss, encoding='utf-8', xml_declaration=True)
